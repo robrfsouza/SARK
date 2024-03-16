@@ -919,7 +919,7 @@ public class FrmMembroRK extends JFrame {
 		lblNewLabel_1_1_1_3_1.setBounds(196, 11, 64, 16);
 		panel_4_1_1_1.add(lblNewLabel_1_1_1_3_1);
 
-		JComboBox <String>cmbGraduacaoPesquisa = new JComboBox<>();
+		JComboBox<String> cmbGraduacaoPesquisa = new JComboBox<>();
 		cmbGraduacaoPesquisa.setFont(new Font("Dialog", Font.PLAIN, 12));
 		cmbGraduacaoPesquisa.setBounds(274, 11, 75, 22);
 		panel_4_1_1_1.add(cmbGraduacaoPesquisa);
@@ -939,8 +939,8 @@ public class FrmMembroRK extends JFrame {
 		panel_4_1_1_1.add(btnPesquisaGraduacao);
 
 		tblGraduacaoColetiva = new JTable();
-		tblGraduacaoColetiva.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matricula", "Nome", "Faixa",
-				"Gradua\u00E7\u00E3o Atual", "Ano", "Semestre", "Academia" }));
+		tblGraduacaoColetiva.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matricula", "Nome",
+				"Faixa", "Gradua\u00E7\u00E3o Atual", "Ano", "Semestre", "Academia" }));
 		tblGraduacaoColetiva.setBounds(10, 38, 747, 171);
 		listarGraduacaoColetiva();
 		panel_4_1_1_1.add(tblGraduacaoColetiva);
@@ -1016,7 +1016,9 @@ public class FrmMembroRK extends JFrame {
 		pnlDadoFederado.add(lblNewLabel_1_1_1_1_4_1_1_1_1);
 
 		JComboBox<String> cmbRegistroGraduacao = new JComboBox<>();
-		cmbRegistroGraduacao.setModel(new DefaultComboBoxModel<>(new String[] {"", "7° Kyu", "6° Kyu", "5° Kyu", "4° Kyu", "3° Kyu", "2° Kyu", "1° Kyu", "1° Dan", "2° Dan", "3° Dan", "4° Dan", "5° Dan", "6° Dan", "7° Dan", "8° Dan", "9° Dan", "10° Dan"}));
+		cmbRegistroGraduacao.setModel(new DefaultComboBoxModel<>(
+				new String[] { "", "7° Kyu", "6° Kyu", "5° Kyu", "4° Kyu", "3° Kyu", "2° Kyu", "1° Kyu", "1° Dan",
+						"2° Dan", "3° Dan", "4° Dan", "5° Dan", "6° Dan", "7° Dan", "8° Dan", "9° Dan", "10° Dan" }));
 		cmbRegistroGraduacao.setFont(new Font("Dialog", Font.PLAIN, 12));
 		cmbRegistroGraduacao.setBounds(149, 77, 113, 22);
 		pnlDadoFederado.add(cmbRegistroGraduacao);
@@ -1271,9 +1273,54 @@ public class FrmMembroRK extends JFrame {
 		panel_3.add(btnPesquisaMatricula);
 
 		txtPesquisaAluno = new JTextField();
-		txtPesquisaAluno.addKeyListener(new KeyAdapter() {
+		/*
+		 * txtPesquisaAluno.addKeyListener(new KeyAdapter() {
+		 * 
+		 * @Override public void keyPressed(KeyEvent e) { String nome = "%" +
+		 * txtPesquisaAluno.getText() + "%"; FederadosDAO dao = new FederadosDAO();
+		 * List<Federado> lista = dao.pesquisarNomeFederado(nome);
+		 * 
+		 * if (lista != null) { DefaultTableModel dados = (DefaultTableModel)
+		 * tblFederado.getModel(); dados.setNumRows(0);
+		 * 
+		 * for (Federado r : lista) { dados.addRow(new Object[] { r.getMatricula(),
+		 * r.toString(), r.getNome(), r.getAnuidade(), r.getStatus(),
+		 * r.getNumeroRegistro(), r.getRegistro(), r.getAnoRegistro(), r.getIdFederado()
+		 * }); } } else { // Lógica para lidar com a lista nula, se necessário
+		 * JOptionPane.showMessageDialog(null, "A lista retornada é nula."); }
+		 * MembrosDAO mdao = new MembrosDAO(); List<Membros> mlista =
+		 * mdao.pesquisarNomeMembros(nome); if (mlista != null) { DefaultTableModel
+		 * membrosDados = (DefaultTableModel) tblAssociado.getModel();
+		 * membrosDados.setNumRows(0);
+		 * 
+		 * for (Membros r : mlista) {
+		 * 
+		 * membrosDados.addRow(new Object[] { r.getMatricula(), r.getNome(),
+		 * r.getTpMembro(), r.getStatus(), r.getIdAcademia(), r.getDtNascimento(),
+		 * r.getCpf(), r.getDtMatricula(), r.getDtValidade(), r.getCelular(),
+		 * r.getEndereco(), r.getNumero() }); }
+		 * 
+		 * } GraduacaoDAO gdao = new GraduacaoDAO(); List<Graduacao> glista =
+		 * gdao.pesquisarNomeFederado(nome); if(glista!=null) { DefaultTableModel
+		 * graduadosDados = (DefaultTableModel) tblGraduacaoIndividual.getModel();
+		 * graduadosDados.setNumRows(0);
+		 * 
+		 * for (Graduacao r : glista) { graduadosDados.addRow(new Object[] {
+		 * r.getMatricula(), r.getNome(), r.getFaixa(), r.getGraduacao(), r.getAno(),
+		 * r.getSemestre() }); } }
+		 * 
+		 * } });
+		 */
+		txtPesquisaAluno.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtPesquisaAluno.setColumns(10);
+		txtPesquisaAluno.setBounds(452, 12, 208, 20);
+		panel_3.add(txtPesquisaAluno);
+
+		JButton btnPesquisaNome = new JButton("");
+		btnPesquisaNome.addMouseListener(new MouseAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void mouseClicked(MouseEvent e) {
+
 				String nome = "%" + txtPesquisaAluno.getText() + "%";
 				FederadosDAO dao = new FederadosDAO();
 				List<Federado> lista = dao.pesquisarNomeFederado(nome);
@@ -1307,24 +1354,18 @@ public class FrmMembroRK extends JFrame {
 				}
 				GraduacaoDAO gdao = new GraduacaoDAO();
 				List<Graduacao> glista = gdao.pesquisarNomeFederado(nome);
-				if(glista!=null) {
+				if (glista != null) {
 					DefaultTableModel graduadosDados = (DefaultTableModel) tblGraduacaoIndividual.getModel();
 					graduadosDados.setNumRows(0);
-					
+
 					for (Graduacao r : glista) {
-						graduadosDados.addRow(new Object[] { r.getMatricula(), r.getNome(), r.getFaixa(), r.getGraduacao(),
-								r.getAno(), r.getSemestre() });
+						graduadosDados.addRow(new Object[] { r.getMatricula(), r.getNome(), r.getFaixa(),
+								r.getGraduacao(), r.getAno(), r.getSemestre() });
 					}
 				}
-				
+
 			}
 		});
-		txtPesquisaAluno.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtPesquisaAluno.setColumns(10);
-		txtPesquisaAluno.setBounds(452, 12, 208, 20);
-		panel_3.add(txtPesquisaAluno);
-
-		JButton btnPesquisaNome = new JButton("");
 		btnPesquisaNome.setIcon(
 				new ImageIcon(FrmMembroRK.class.getResource("/image/2608311_magnify_search_searching_icon.png")));
 		btnPesquisaNome.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -1388,7 +1429,7 @@ public class FrmMembroRK extends JFrame {
 					r.getAno(), r.getSemestre() });
 		}
 	}
-	
+
 	// listar tabela graduacao de todos os membros
 	public void listarGraduacaoColetiva() {
 		GraduacaoDAO dao = new GraduacaoDAO();
@@ -1489,13 +1530,14 @@ public class FrmMembroRK extends JFrame {
 		// requisito.
 		return null;
 	}
-	
+
 	private Membros ValidaCpfNulo(Membros membros) {
-		String cpfText = txtCpf.getText().replaceAll("[^0-9]",""); // Remove caracteres não numéricos
+		String cpfText = txtCpf.getText().replaceAll("[^0-9]", ""); // Remove caracteres não numéricos
 		if (cpfText.isEmpty()) {
 			membros.setCpf(null); // Atribui valor nulo se o CPF estiver vazio
-		}else  {
-			membros.setCpf(txtCpf.getText()); // Atribui o valor original do campo se houver pelo menos um dígito numérico
+		} else {
+			membros.setCpf(txtCpf.getText()); // Atribui o valor original do campo se houver pelo menos um dígito
+												// numérico
 		}
 		return membros;
 	}
